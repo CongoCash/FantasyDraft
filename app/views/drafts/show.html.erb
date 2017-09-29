@@ -1,2 +1,11 @@
 <h1>Draft for: <%= @draft.league.name %></h1>
 <h2>Next pick: <%= @team.name %></h2>
+
+<%= form_for @player_team, url: create_player_team_path(@draft.league.id) do |f| %>
+ <%= f.submit %>
+ <% @players.each do |player| %>
+<p>
+<%= radio_button_tag("player_id", player.id) %> <%=player.name %>
+</p>
+  <% end %>
+<% end %>
