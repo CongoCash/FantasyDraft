@@ -19,6 +19,7 @@ class DraftsController < ApplicationController
     @draft = Draft.find_by_id(params[:id])
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
     @player_team = PlayerTeam.new
+    @players = Player.all
     # Draft Order [1, 2, 3]
     # Draft Next Pick Index = 0 or 1 or 2
   end

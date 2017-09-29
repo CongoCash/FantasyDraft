@@ -3,7 +3,8 @@ class PlayerTeamsController < ApplicationController
     @league = League.find_by_id(params[:league_id])
     @draft = @league.draft
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
-    @player_team = PlayerTeam.new(player_team_params)
+    @player_team = PlayerTeam.new
+    @player_team.player_id = params[:player_id]
     @player_team.team = @team
     if @player_team.save
       flash[:success] = "Succesfully drafted a player!"
@@ -12,8 +13,7 @@ class PlayerTeamsController < ApplicationController
     else
       flash[:error] = @player_team.errors.full_messages.join(". ")
     end
-    redirect_to draft_path(@draft.league.id, @draft.id)
-
+      redirect_to draft_path(@draft.league.id, @draft.id)
   end
   private
 
