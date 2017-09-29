@@ -1,5 +1,8 @@
 <h1>Draft for: <%= @draft.league.name %></h1>
 <h2>Next pick: <%= @team.name %></h2>
+<% @draft.history.each do |history| %>
+    <p><%=Player.find_by_id(history).name %></p>
+<% end %>
 
 <%= form_for @player_team, url: create_player_team_path(@draft.league.id) do |f| %>
  <%= f.submit %>

@@ -8,6 +8,7 @@ class PlayerTeamsController < ApplicationController
     @player_team.team = @team
     if @player_team.save
       flash[:success] = "Succesfully drafted a player!"
+      @draft.history << @player_team.player_id
       @draft.next_pick_index += 1
       @draft.save
     else
