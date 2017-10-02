@@ -1,10 +1,24 @@
-<div class="header">
-	<h2>2017 OFFICAL FANTASY GAME OF THE NFL</h2>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="header col s10 offset-s1">
+      <h2>2017 OFFICAL FANTASY GAME OF THE NFL</h2>
+      <%= link_to 'Create League', new_league_path, class: 'btn btn-primary center-align' %>
+    </div>
+  </div>
 
-<% @leagues.each do |league| %>
-	<h4><%= league.name %></h4>
-	<p><%= league.number_of_teams %></p>
-	<p><%= league.format %></p>
-	<p><strong>Owner: </strong><%= league.user.name %></p>
-<% end %>
+  <div class="row">
+    <div class="col s12 center-align">
+      <% @leagues.each do |league| %>
+          <hr>
+          <h4><%= link_to league.name, league_path(league.id), class:'btn btn-primary'%></h4>
+          <p><%= league.number_of_teams %></p>
+          <p><strong>Number of teams: </strong><%= league.teams.length %></p>
+          <p>
+            <strong>Commissioner: </strong>
+            <%= link_to league.user.name, user_path(league.user.id) %>
+          </p>
+      <% end %>
+    </div>
+  </div>
+
+</div>
