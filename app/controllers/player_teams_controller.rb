@@ -10,6 +10,7 @@ class PlayerTeamsController < ApplicationController
       flash[:success] = "Succesfully drafted a player!"
       @draft.history << @player_team.player_id
       @draft.next_pick_index += 1
+      @draft.order.shift
       @draft.save
     else
       flash[:error] = @player_team.errors.full_messages.join(". ")
