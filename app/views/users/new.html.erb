@@ -1,4 +1,4 @@
-Sign Up
+<h5>Create an Account</h5>
 
 <%= form_for @user do |f| %>
   <div>
@@ -10,5 +10,5 @@ Sign Up
   <div>
     <%= f.password_field :password, placeholder: "Password" %>
   </div>
-  <%= f.submit "Sign Up" %>
+  <%= f.submit "Sign Up", class: "btn" %>
 <% end %>

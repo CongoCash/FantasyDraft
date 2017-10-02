@@ -1,5 +1,9 @@
+<div class="header">
+	<h2>2017 OFFICAL FANTASY GAME OF THE NFL</h2>
+</div>
+
 <% @leagues.each do |league| %>
-	<h2><%= league.name %></h2>
+	<h4><%= league.name %></h4>
 	<p><%= league.number_of_teams %></p>
 	<p><%= league.format %></p>
 	<p><strong>Owner: </strong><%= league.user.name %></p>
