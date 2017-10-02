@@ -10,7 +10,8 @@
   </div>
 </div>
 <h2>Next pick: <%= @team.name %></h2>
-<% @draft.history.each do |history| %>
+<% @draft.history.each_with_index do |history, index| %>
+    <%= Team.find_by_id(@draft.order[index]).name %>
     <p><%=Player.find_by_id(history).name %></p>
 <% end %>
 
