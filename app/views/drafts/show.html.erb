@@ -16,7 +16,7 @@
 <% end %>
 
 <%= form_for @player_team, url: create_player_team_path(@draft.league.id) do |f| %>
- <%= f.submit %>
+ <%= f.submit "Draft Player" %>
  <% @players.each do |player| %>
     <p><%= radio_button_tag("player_id", player.id) %> <%=player.name %></p>
   <% end %>

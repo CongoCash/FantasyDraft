@@ -30,7 +30,7 @@ class DraftsController < ApplicationController
   end
 
   def show
-    @draft = Draft.find_by_id(params[:id])
+    @draft = League.find_by_id(params[:id]).draft
     @team_order = Team
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
     @player_team = PlayerTeam.new

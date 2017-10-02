@@ -120,6 +120,5 @@ Team.create([
   name: "Team 6",
   league: League.third,
   user: User.first,
-  players: [Player.first, Player.second, Player.third]
   },
   ])

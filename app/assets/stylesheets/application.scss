@@ -11,4 +11,46 @@
  * It is generally better to create a new file per style scope.
  *
  */
-@import "bootstrap";
+@import "materialize";
+@import "materialize/components/color";
+@import "materialize/extras/nouislider";
+
+nav {
+  background-color: black;
+  box-shadow: none;
+}
+
+.header{
+  text-align: center;
+  padding: 0 18%;
+  margin-bottom: 40px;
+  border: black;
+}
+body {
+  //background-image: url("navbar_image.jpg");
+  background-position: 0px 64px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+//h2 {
+//  color: white;
+//  text-align: center;
+//  font-family: 'Anton', sans-serif;
+//  border-style: solid;
+//  border-width: 5px;
+//
+//}
+h4 {
+  color: black;
+  font-family: 'Anton', sans-serif;
+
+}
+//p {
+//  color: black;
+//  border: 5px black;
+//  border-style: solid;
+//  width: 10%
+//}
+::placeholder {
+  color: black;
+}
