@@ -1,23 +1,30 @@
-<h2><%= @league.name %></h2>
-	<p><%= @league.number_of_teams %></p>
-	<p><%= @league.format %></p>
-	<p><strong>Owner: </strong><%= @league.user.name %></p>
-<% if @league.draft.nil? %>
-  <%= button_to "Create Draft", create_draft_path(@league.id) %>
-    <% else %>
-    <%= link_to "View Draft", draft_path(@league.id), class: "btn btn-danger" %>
-<% end %>
+<div class="container">
 
-<h4>Team</h4>
-	<% @league.teams.each do |team| %>
+  <div class="row">
+    <div class="col s12 center-align">
+      <h2><%= @league.name %></h2>
+      <p><%= @league.number_of_teams %></p>
+      <p><strong>Commissioner: </strong>
+        <%= link_to @league.user.name, user_path(@league.user.id) %></p>
+    </div>
+  </div>
 
-		<p>Team Name: <%= team.name %></p>
-		<p>Owner: <%= team.user.name%></p>
-		<% team.players.each do |player| %>
-		<p>Player Name: <%= player.name %></p>
-		<p>Position: <%= player.position %></p>
-		<p>NFL Team: <%= player.nfl_team %></p>
-		<p>
-		</p>
-		<% end %>
-	<% end %>
+  <div class="row">
+    <div class="col s12 center-align">
+      <% if @league.draft.nil? %>
+          <%= button_to "Create Draft", create_draft_path(@league.id) %>
+      <% elsif @league.draft.next_pick_index <= @league.draft.order.length%>
+          <%= link_to "View Draft", draft_path(@league.id), class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <% @league.teams.each do |team| %>
+      <div class="col s4 center-align">
+        <%= link_to team.name, league_team_path(team.league.id, team.id)%>
+      </div>
+    <% end %>
+  </div>
+</div>
