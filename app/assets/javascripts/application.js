@@ -16,5 +16,4 @@
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 //= require jquery3
-//= require popper
-//= require bootstrap-sprockets
+
