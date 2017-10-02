@@ -3,7 +3,7 @@ class DraftsController < ApplicationController
   def create
     @draft = Draft.new
     @draft.next_pick_index = 0
-    @draft.league = League.find_by_id(params[:league_id])
+    @draft.league = League.find_by_id(params[:id])
     @draft_odd_round_order = []
     @draft.league.teams.each do |team|
       @draft_odd_round_order << team['id']
