@@ -2,8 +2,11 @@
 	<p><%= @league.number_of_teams %></p>
 	<p><%= @league.format %></p>
 	<p><strong>Owner: </strong><%= @league.user.name %></p>
+<% if @league.draft.nil? %>
   <%= button_to "Create Draft", create_draft_path(@league.id) %>
-
+    <% else %>
+    <%= link_to "View Draft", draft_path(@league.id), class: "btn btn-danger" %>
+<% end %>
 
 <h4>Team</h4>
 	<% @league.teams.each do |team| %>

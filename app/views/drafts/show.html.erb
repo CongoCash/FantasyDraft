@@ -1,11 +1,23 @@
-<h1>Draft for: <%= @draft.league.name %></h1>
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="col-sm-6">Draft for: <%= @draft.league.name %></h1>
+  </div>
+  <h1>Draft Order</h1>
+  <div class="row">
+    <% @draft.order[0..9].each do |team_id| %>
+      <h5 class="col-sm-1 <%='team_'+ team_id.to_s%>"><%= @team_order.find_by_id(team_id).name %></h5>
+    <% end %>
+  </div>
+</div>
 <h2>Next pick: <%= @team.name %></h2>
+<% @draft.history.each_with_index do |history, index| %>
+    <%= Team.find_by_id(@draft.order[index]).name %>
+    <p><%=Player.find_by_id(history).name %></p>
+<% end %>
 
 <%= form_for @player_team, url: create_player_team_path(@draft.league.id) do |f| %>
- <%= f.submit %>
+ <%= f.submit "Draft Player" %>
  <% @players.each do |player| %>
-<p>
-<%= radio_button_tag("player_id", player.id) %> <%=player.name %>
-</p>
+    <p><%= radio_button_tag("player_id", player.id) %> <%=player.name %></p>
   <% end %>
 <% end %>
