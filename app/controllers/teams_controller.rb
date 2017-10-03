@@ -3,6 +3,10 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @league = League.find_by_id(params[:league_id])
+    if @league.teams.length >= @league.number_of_teams
+      flash[:error] = "League is already full."
+      redirect_to @league
+    end
   end
 
   def create
@@ -19,6 +23,12 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find_by_id(params[:id])
+  end
+
+  def destroy
+    @team = Team.find_by_id(params[:team_id])
+    @team.delete
+    redirect_to league_path(params[:league_id])
   end
 
   private

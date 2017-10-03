@@ -1,9 +1,9 @@
 
 
-<%= form_for [@league,@team] do |f| %>
+<%= form_for [@league, @team] do |f| %>
   <div>
     <%= f.text_field :name, placeholder: "Name" %>
   </div>
-
-  <%= f.submit "Add Team" %>
+  <%= link_to "Cancel", league_path(:id), class: 'btn grey' %>
+  <%= f.submit "Add Team", class:'btn green' %>
 <% end %>

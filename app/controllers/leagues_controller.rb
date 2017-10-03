@@ -6,6 +6,12 @@ class LeaguesController < ApplicationController
 
 	def show
 		@league = League.find(params[:id])
+    @user_in_league = false
+    @league.teams.each do |team|
+      if team.user == current_user
+        @user_in_league = true
+      end
+    end
 	end
 
 	def new
@@ -21,7 +27,7 @@ class LeaguesController < ApplicationController
 			flash[:error] = @league.errors.full_messages.join(". ")
 			redirect_to new_league_path
 		end
-	end
+  end
 
 	private
 

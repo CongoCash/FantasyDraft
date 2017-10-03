@@ -76,17 +76,20 @@ League.create([
   {
   user: User.first,
   name: "League 1",
-  format: "format 1"
+  format: "format 1",
+  number_of_teams: 10
   },
   {
   user: User.second,
   name: "League 2",
-  format: "format 2"
+  format: "format 2",
+  number_of_teams: 6
   },
   {
   user: User.third,
   name: "League 3",
-  format: "format 3"
+  format: "format 3",
+  number_of_teams: 10
   },
     ])
 
