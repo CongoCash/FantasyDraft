@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929230624) do
+ActiveRecord::Schema.define(version: 20171003142108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "draft_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["draft_id"], name: "index_comments_on_draft_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "drafts", force: :cascade do |t|
     t.integer "order", default: [], array: true
@@ -70,6 +80,8 @@ ActiveRecord::Schema.define(version: 20170929230624) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "drafts"
+  add_foreign_key "comments", "users"
   add_foreign_key "drafts", "leagues"
   add_foreign_key "leagues", "users"
   add_foreign_key "player_teams", "players"

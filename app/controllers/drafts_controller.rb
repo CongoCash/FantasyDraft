@@ -35,6 +35,7 @@ class DraftsController < ApplicationController
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
     @player_team = PlayerTeam.new
     @players = Player.all - @draft.league.players
+    @comment = Comment.new
     # Draft Order [1, 2, 3]
     # Draft Next Pick Index = 0 or 1 or 2
   end
