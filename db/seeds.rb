@@ -110,6 +110,41 @@ Team.create([
   user: User.third
   },
   {
+    name: "Team 4",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 5",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 6",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 7",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 8",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 9",
+    league: League.first,
+    user: User.first
+  },
+  {
+    name: "Team 10",
+    league: League.first,
+    user: User.first
+  },
+  {
   name: "Team 4",
   league: League.second,
   user: User.first
