@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
 	has_many :leagues
 	has_many :teams
+	has_many :comments
 
 	def self.confirm(params)
     @user = User.find_by({email: params[:email]})

@@ -55,4 +55,5 @@ Rails.application.configure do
   #For direct linkage to atom from error_page
   BetterErrors.editor='atm://open?url=file://%{file}&line=%{line}' if defined? BetterErrors
 
+  config.action_cable.url = "ws://localhost:3000/cable"
 end
