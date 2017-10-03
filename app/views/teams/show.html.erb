@@ -8,7 +8,10 @@
     <div class="col s12 left-align">
       <hr>
       <% @team.players.each do |player| %>
-          <p><%= player.name %></p>
+          <p><%= player.name %> <%= player.position %> <%= player.nfl_team %> 
+          <% if player.nfl_team != "" %>
+            <%= image_tag "#{player.nfl_team}.png", width: '32' %>
+          <% end %> </p>
           <hr>
       <% end %>
     </div>

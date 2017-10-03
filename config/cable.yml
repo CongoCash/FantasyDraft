@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:26dcc0eadaa4a7770da96e5a9a0c9f03@grouper.redistogo.com:9250/
   channel_prefix: FantasyDraft_production
