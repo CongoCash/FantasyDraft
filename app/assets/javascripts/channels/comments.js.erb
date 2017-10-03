@@ -1,0 +1,11 @@
+App.comments = App.cable.subscriptions.create({channel: 'CommentsChannel', id: window.location.pathname.split('/')[2]}, {  
+  received: function(data) {
+  	if ($(".comments").children().length >= 10)
+    	$(".comments").children()[0].remove();
+    return $('.comments').append(this.renderComment(data));
+  },
+
+  renderComment: function(data) {
+    return "<p> <b>" + data.user + ": </b>" + data.comment + "</p>";
+  }
+});

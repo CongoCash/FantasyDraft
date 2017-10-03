@@ -15,7 +15,7 @@
     <% end %>
   
   <h3>Last 10 Picks:</h3>
-  <div class="row">
+  <div class="row picks">
   <% @draft.history.last(10).each_with_index do |history, index| %>
     <div class="col m3 l2 xl1">
     <div class="card small">
@@ -49,7 +49,7 @@
 <h3>Next pick: <%= @team.name %></h3>
 
 
-<%= form_for @player_team, url: create_player_team_path(@draft.league.id) do |f| %>
+<%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
  <%= f.submit "Draft Player", class: "btn btn-large" %>
  <div class="collection">
  <% @players.each do |player| %>
