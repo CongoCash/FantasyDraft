@@ -55,12 +55,12 @@
 
       <div class="col s2 left-align">
         <% if league.teams.length >= league.number_of_teams%>
-          <p class="league-full">League Full</p>
+          <p class="bold-red">League Full</p>
         <% elsif league.draft != nil %>
             <p><%= link_to "Draft", draft_path(league.id), class: 'btn' %></p>
         <% else %>
           <p><%= link_to "Join", new_league_team_path(league.id), class:'btn green' %></p>
-      <% end %>
+        <% end %>
       </div>
       <hr>
     <% end %>

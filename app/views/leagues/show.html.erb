@@ -34,21 +34,50 @@
     </div>
   </div>
 
-
+  <div class="row">
+    <div class="col s1 left-align">
+      <p>Rank</p>
+    </div>
+    <div class="col s4 left-align">
+      <p>Team</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Record</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Points For</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Points Against</p>
+    </div>
+    <div class="col s1 left-align">
+      <p>Moves</p>
+    </div>
+  </div>
   <div class="row">
     <% @league.teams.each do |team| %>
-      <div class="col s4 center-align">
-        <%= link_to team.name, league_team_path(team.league.id, team.id)%>
-        <h1><%=team.id%></h1>
-        <% if current_user == @league.user %>
-          <%= button_to 'Remove from league', team_destroy_path(team.league_id), method: :delete,
-            params: {:team_id => team.id}, class: 'btn red'%>
-        <% end %>
-        <% if current_user != @league.user && current_user == team.user %>
-          <%= button_to 'Leave League', team_destroy_path(team.league_id), method: :delete,
-            params: {:team_id => team.id}, class: 'btn red'%>
-        <% end %>
-      </div>
+      <%= link_to league_team_path(params[:id], team.id), class:'link-style' do%>
+        <div class="col s1 left-align">
+          <p>" "</p>
+        </div>
+        <div class="col s4 left-align">
+          <p><%= team.name %> </p>
+        </div>
+        <div class="col s2 left-align">
+          <p><%= team.wins.to_s + '-' + team.losses.to_s + '-' + team.ties.to_s %></p>
+        </div>
+        <div class="col s2 left-align">
+          <p><%= team.points_for %></p>
+        </div>
+        <div class="col s2 left-align">
+          <p><%= team.points_against %></p>
+        </div>
+        <div class="col s1 left-align">
+          <p><%= team.moves %></p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
+
+
