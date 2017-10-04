@@ -14,7 +14,8 @@ class PlayerTeamsController < ApplicationController
         team: @player_team.team,
         draft: @draft,
         next_team: Team.find_by_id(@draft.order[@draft.next_pick_index]),
-        last_team: Team.find_by_id(@draft.order[@draft.next_pick_index+9])
+        last_team: Team.find_by_id(@draft.order[@draft.next_pick_index+9]),
+        current_user: @team.user
     else
       flash[:error] = @player_team.errors.full_messages.join(". ")
       redirect_to draft_path(@draft.league.id, @draft.id)
