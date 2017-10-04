@@ -1,24 +1,67 @@
 <div class="container">
   <div class="row">
     <div class="header col s10 offset-s1">
-      <h2>2017 OFFICAL FANTASY GAME OF THE NFL</h2>
-      <%= link_to 'Create League', new_league_path, class: 'btn btn-primary center-align' %>
+      <h2>2017 OFFICIAL FANTASY GAME OF THE NFL</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center-align">
+      <%= link_to 'Create League', new_league_path, class: 'btn btn-primary btn-large blue' %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col s12 center-align">
-      <% @leagues.each do |league| %>
-          <hr>
-          <h4><%= link_to league.name, league_path(league.id), class:'btn btn-primary'%></h4>
-          <p><%= league.number_of_teams %></p>
-          <p><strong>Number of teams: </strong><%= league.teams.length %></p>
-          <p>
-            <strong>Commissioner: </strong>
-            <%= link_to league.user.name, user_path(league.user.id) %>
-          </p>
-      <% end %>
+    <div class="col s12">
+      <h4 class="align-center">Available Leagues</h4>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col s3 offset-s1 left-align">
+      <h5>League Name</h5>
+    </div>
+
+    <div class="col s3 left-align">
+      <h5>Number of Teams</h5>
+    </div>
+
+    <div class="col s3 left-align">
+      <h5>Commissioner</h5>
+    </div>
+
+    <div class="col s2 left-align">
+      <h5>Status</h5>
+    </div>
+  </div>
+
+  <hr>
+    <% @leagues.each do |league| %>
+      <div class="row link-style">
+        <%= link_to league do%>
+          <div class="col s3 offset-s1 left-align">
+            <p><%= league.name %></p>
+          </div>
+
+          <div class="col s3 left-align">
+            <p><%= league.teams.length.to_s + '/' + league.number_of_teams.to_s %></p>
+          </div>
+
+          <div class="col s3 left-align">
+            <p><%= league.user.name %></p>
+          </div>
+
+        <% end %>
+
+        <div class="col s2 left-align">
+          <% if league.teams.length >= league.number_of_teams%>
+            <p class="bold-red">League Full</p>
+          <% elsif league.draft != nil %>
+              <p><%= link_to "Draft", draft_path(league.id), class: 'btn' %></p>
+          <% else %>
+            <p><%= link_to "Join", new_league_team_path(league.id), class:'btn green' %></p>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
 
 </div>
