@@ -35,10 +35,14 @@
   </div>
 <div>
   <h3>Next 10 picks:</h3>
-  <div class="row">
+  <div class="row next-picks">
     <% @draft.order[@draft.next_pick_index..@draft.next_pick_index+9].each_with_index do |team_id, index| %>
       <div class="col m3 l2 xl1 <%='team_'+ team_id.to_s%>">
-      <div class = "card">
+      <% if Team.find_by_id(team_id).user == current_user %>
+        <div class = "card yellow">
+      <% else %>
+        <div class = "card">
+      <% end %>
       <div class = "card-content">
       <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %></strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
       </div>
@@ -46,7 +50,7 @@
     <% end %>
   </div>
 </div>
-<h3>Next pick: <%= @team.name %></h3>
+<h3 id="next-pick">Next pick: <%= @team.name %></h3>
 
 
 <%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>

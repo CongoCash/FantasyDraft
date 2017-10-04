@@ -1,5 +1,5 @@
 class League < ApplicationRecord
-  has_one :draft
+  has_one :draft, dependent: :destroy
   belongs_to :user
   
   has_many :teams
