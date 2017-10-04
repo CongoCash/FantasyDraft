@@ -5,15 +5,112 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s12 left-align">
-      <hr>
-      <% @team.players.each do |player| %>
-          <p><%= player.name %> <%= player.position %> <%= player.nfl_team %> 
-          <% if player.nfl_team != "" %>
-            <%= image_tag "#{player.nfl_team}.png", width: '32' %>
-          <% end %> </p>
-          <hr>
-      <% end %>
+
+    <div class="col s1 left-align">
+      <p>Position</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Player</p>
+    </div>
+
+    <div class="col s2 left-align">
+      <div class="row">
+        <div class="col s4 left-align">
+          <p>Pass Yards</p>
+        </div>
+        <div class="col s4 left-align">
+          <p>Pass TD</p>
+        </div>
+        <div class="col s4 left-align">
+          <p>INT</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s3 left-align">
+      <div class="row">
+        <div class="col s4 left-align">
+          <p>Rush Att</p>
+        </div>
+        <div class="col s4 left-align">
+          <p>Rush Yards</p>
+        </div>
+        <div class="col s4 left-align">
+          <p>Rush TD</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 left-align">
+      <div class="row">
+        <div class="col s3 left-align">
+          <p>Rec</p>
+        </div>
+        <div class="col s3 left-align">
+          <p>Rec Yards</p>
+        </div>
+        <div class="col s3 left-align">
+          <p>Rec TD</p>
+        </div>
+        <div class="col s3 left-align">
+          <p>Fumbles</p>
+        </div>
+      </div>
     </div>
   </div>
+
+  <% @team.players.each do |player| %>
+      <div class="row">
+
+        <div class="col s1 left-align">
+          <p><%=player.position%></p>
+        </div>
+        <div class="col s2 left-align">
+          <p><%=player.name%></p>
+        </div>
+
+        <div class="col s2 left-align">
+          <div class="row">
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["pass_yards"]%></p>
+            </div>
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["pass_td"]%></p>
+            </div>
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["pass_int"]%></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s3 left-align">
+          <div class="row">
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["rush_attempts"]%></p>
+            </div>
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["rush_yards"]%></p>
+            </div>
+            <div class="col s4 left-align">
+              <p><%=player.player_stat[0]["rush_td"]%></p>
+            </div>
+          </div>
+        </div>
+        <div class="col s4 left-align">
+          <div class="row">
+            <div class="col s3 left-align">
+              <p><%=player.player_stat[0]["receptions"]%></p>
+            </div>
+            <div class="col s3 left-align">
+              <p><%=player.player_stat[0]["receive_yards"]%></p>
+            </div>
+            <div class="col s3 left-align">
+              <p><%=player.player_stat[0]["receive_td"]%></p>
+            </div>
+            <div class="col s3 left-align">
+              <p><%=player.player_stat[0]["fumbles_lost"]%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
 </div>

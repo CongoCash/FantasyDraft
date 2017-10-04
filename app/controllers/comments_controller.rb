@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 		@comment.user = current_user
 		@comment.draft = League.find(params[:id]).draft
 		if @comment.save
-			ActionCable.server.broadcast 'comments',
+			ActionCable.server.broadcast "comments_#{params[:id]}",
         comment: @comment.content,
         user: @comment.user.name
       # head :ok

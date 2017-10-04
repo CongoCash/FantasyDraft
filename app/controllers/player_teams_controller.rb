@@ -6,14 +6,17 @@ class PlayerTeamsController < ApplicationController
     @player_team = PlayerTeam.new player_team_params
     @player_team.team = @team
     if @player_team.save
-      flash[:success] = "Succesfully drafted a player!"
       @draft.history << @player_team.player_id
       @draft.next_pick_index += 1
       @draft.save
+      ActionCable.server.broadcast "draft_picks_#{params[:league_id]}",
+        player: @player_team.player,
+        team: @player_team.team
     else
       flash[:error] = @player_team.errors.full_messages.join(". ")
-    end
       redirect_to draft_path(@draft.league.id, @draft.id)
+    end
+      
   end
   private
 

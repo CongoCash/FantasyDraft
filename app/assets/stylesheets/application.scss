@@ -62,6 +62,16 @@ body {
 .link-style {
   font-weight: bold;
   color: black;
+  display: block;
+}
+
+.link-style:hover {
+  background-color: #7b7b7b;
+  color: black;
+}
+
+div.link-style {
+  margin-bottom: 0px;
 }
 
 .bold-red {

@@ -21,7 +21,7 @@
       <% elsif @league.draft.nil?%>
         <p>Draft has not be created yet</p>
 
-      <% elsif @league.draft.next_pick_index <= @league.draft.order.length%>
+      <% elsif @league.draft.next_pick_index < @league.draft.order.length%>
         <%= link_to "View Draft", draft_path(@league.id), class: "btn red" %>
       <% end %>
 
@@ -54,30 +54,30 @@
       <p>Moves</p>
     </div>
   </div>
-  <div class="row">
     <% @league.teams.each do |team| %>
-      <%= link_to league_team_path(params[:id], team.id), class:'link-style' do%>
-        <div class="col s1 left-align">
-          <p>" "</p>
-        </div>
-        <div class="col s4 left-align">
-          <p><%= team.name %> </p>
-        </div>
-        <div class="col s2 left-align">
-          <p><%= team.wins.to_s + '-' + team.losses.to_s + '-' + team.ties.to_s %></p>
-        </div>
-        <div class="col s2 left-align">
-          <p><%= team.points_for %></p>
-        </div>
-        <div class="col s2 left-align">
-          <p><%= team.points_against %></p>
-        </div>
-        <div class="col s1 left-align">
-          <p><%= team.moves %></p>
-        </div>
-      <% end %>
+      <div class="row link-style">
+        <%= link_to league_team_path(params[:id], team.id), class:'link-style' do%>
+          <div class="col s1 left-align">
+            <p>" "</p>
+          </div>
+          <div class="col s4 left-align">
+            <p><%= team.name %> </p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.wins.to_s + '-' + team.losses.to_s + '-' + team.ties.to_s %></p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.points_for %></p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.points_against %></p>
+          </div>
+          <div class="col s1 left-align">
+            <p><%= team.moves %></p>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </div>
 </div>
 
 

@@ -34,36 +34,34 @@
     </div>
   </div>
 
-  <div class="row">
-    <hr>
+  <hr>
     <% @leagues.each do |league| %>
-      <%= link_to league, class:'link-style' do%>
+      <div class="row link-style">
+        <%= link_to league do%>
+          <div class="col s3 offset-s1 left-align">
+            <p><%= league.name %></p>
+          </div>
 
-        <div class="col s3 offset-s1 left-align">
-          <p><%= league.name %></p>
-        </div>
+          <div class="col s3 left-align">
+            <p><%= league.teams.length.to_s + '/' + league.number_of_teams.to_s %></p>
+          </div>
 
-        <div class="col s3 left-align">
-          <p><%= league.teams.length.to_s + '/' + league.number_of_teams.to_s %></p>
-        </div>
+          <div class="col s3 left-align">
+            <p><%= league.user.name %></p>
+          </div>
 
-        <div class="col s3 left-align">
-          <p><%= league.user.name %></p>
-        </div>
-
-      <% end %>
-
-      <div class="col s2 left-align">
-        <% if league.teams.length >= league.number_of_teams%>
-          <p class="bold-red">League Full</p>
-        <% elsif league.draft != nil %>
-            <p><%= link_to "Draft", draft_path(league.id), class: 'btn' %></p>
-        <% else %>
-          <p><%= link_to "Join", new_league_team_path(league.id), class:'btn green' %></p>
         <% end %>
+
+        <div class="col s2 left-align">
+          <% if league.teams.length >= league.number_of_teams%>
+            <p class="bold-red">League Full</p>
+          <% elsif league.draft != nil %>
+              <p><%= link_to "Draft", draft_path(league.id), class: 'btn' %></p>
+          <% else %>
+            <p><%= link_to "Join", new_league_team_path(league.id), class:'btn green' %></p>
+          <% end %>
+        </div>
       </div>
-      <hr>
-    <% end %>
-  </div>
+      <% end %>
 
 </div>
