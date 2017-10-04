@@ -16,7 +16,7 @@
 //= require materialize
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-
+//= require js-cookie
 
 //= require_tree ./channels
 
