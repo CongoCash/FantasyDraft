@@ -40,11 +40,11 @@ body {
 //  border-width: 5px;
 //
 //}
-h4 {
-  color: black;
-  font-family: 'Anton', sans-serif;
-
-}
+//h4 {
+//  color: black;
+//  font-family: 'Anton', sans-serif;
+//
+//}
 /*p {
   color: black;
   border: 1px black;
@@ -53,4 +53,28 @@ h4 {
 }*/
 ::placeholder {
   color: black;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.link-style {
+  font-weight: bold;
+  color: black;
+  display: block;
+}
+
+.link-style:hover {
+  background-color: #7b7b7b;
+  color: black;
+}
+
+div.link-style {
+  margin-bottom: 0px;
+}
+
+.bold-red {
+  color: red;
+  font-weight: bold;
 }

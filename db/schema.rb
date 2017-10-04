@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003142108) do
+ActiveRecord::Schema.define(version: 20171003235533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,24 @@ ActiveRecord::Schema.define(version: 20171003142108) do
     t.index ["user_id"], name: "index_leagues_on_user_id"
   end
 
+  create_table "player_stats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "player_id"
+    t.integer "pass_attempts"
+    t.integer "pass_completions"
+    t.integer "pass_yards"
+    t.integer "pass_td"
+    t.integer "pass_int"
+    t.integer "rush_attempts"
+    t.integer "rush_yards"
+    t.integer "rush_td"
+    t.integer "receptions"
+    t.integer "receive_yards"
+    t.integer "receive_td"
+    t.integer "fumbles_lost"
+  end
+
   create_table "player_teams", force: :cascade do |t|
     t.bigint "player_id"
     t.bigint "team_id"
@@ -60,6 +78,7 @@ ActiveRecord::Schema.define(version: 20171003142108) do
     t.string "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "player_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -68,6 +87,13 @@ ActiveRecord::Schema.define(version: 20171003142108) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rank", default: 0
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
+    t.integer "ties", default: 0
+    t.decimal "points_for", default: "0.0"
+    t.decimal "points_against", default: "0.0"
+    t.integer "moves", default: 0
     t.index ["league_id"], name: "index_teams_on_league_id"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end

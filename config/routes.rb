@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   
   root to: "leagues#index"
 
+  delete '/leagues/:league_id', to: 'teams#destroy', as: 'team_destroy'
+
   resources :users
   resources :leagues do
-    resources :teams
+    resources :teams, :except => ['destroy']
   end
 
   get 'login', to: 'sessions#new', as: 'login'

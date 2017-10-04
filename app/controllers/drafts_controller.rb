@@ -18,9 +18,7 @@ class DraftsController < ApplicationController
       end
       round += 1
     end
-    # @draft.order = [@draft.league.teams[0].id,
-    #                 @draft.league.teams[1].id,
-    #                 @draft.league.teams[2].id]
+
     if @draft.save
       redirect_to draft_path(@draft.league.id, @draft.id)
     else
@@ -31,13 +29,16 @@ class DraftsController < ApplicationController
 
   def show
     @draft = League.find_by_id(params[:id]).draft
+    @user = League.find_by_id(params[:id]).user
+    # if @draft.nil?
+    #   flash[:error] = "Draft has not started yet!"
+    #   redirect_to league_path(params[:id])
+    # end
     @team_order = Team
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
     @player_team = PlayerTeam.new
     @players = Player.all - @draft.league.players
     @comment = Comment.new
-    # Draft Order [1, 2, 3]
-    # Draft Next Pick Index = 0 or 1 or 2
   end
 
 end

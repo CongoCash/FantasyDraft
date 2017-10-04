@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col s12 center-align">
       <h2><%= @league.name %></h2>
-      <p><%= @league.number_of_teams %></p>
+      <p>Maximum Number of Teams: <%= @league.number_of_teams %></p>
       <p><strong>Commissioner: </strong>
         <%= link_to @league.user.name, user_path(@league.user.id) %></p>
     </div>
@@ -11,20 +11,73 @@
 
   <div class="row">
     <div class="col s12 center-align">
-      <% if @league.draft.nil? %>
-          <%= button_to "Create Draft", create_draft_path(@league.id) %>
-      <% elsif @league.draft.next_pick_index <= @league.draft.order.length%>
-          <%= link_to "View Draft", draft_path(@league.id), class: "btn btn-danger" %>
+      <% if @league.draft.nil? && @league.user == current_user && @league.teams.length > 0%>
+        <%= button_to "Create Draft", create_draft_path(@league.id),
+        class: 'btn blue'%>
+
+      <% elsif @league.draft.nil? && @league.teams.length == 0%>
+        <h1>A league must have 1 team before a draft can be created.</h1>
+
+      <% elsif @league.draft.nil?%>
+        <p>Draft has not be created yet</p>
+
+      <% elsif @league.draft.next_pick_index < @league.draft.order.length%>
+        <%= link_to "View Draft", draft_path(@league.id), class: "btn red" %>
+      <% end %>
+
+      <% if @league.teams.length < @league.number_of_teams && @league.draft.nil? &&
+        @user_in_league == false %>
+
+        <%= link_to 'Join league', new_league_team_path(@league.id),
+                    class:'btn green' %>
       <% end %>
     </div>
   </div>
 
-
   <div class="row">
+    <div class="col s1 left-align">
+      <p>Rank</p>
+    </div>
+    <div class="col s4 left-align">
+      <p>Team</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Record</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Points For</p>
+    </div>
+    <div class="col s2 left-align">
+      <p>Points Against</p>
+    </div>
+    <div class="col s1 left-align">
+      <p>Moves</p>
+    </div>
+  </div>
     <% @league.teams.each do |team| %>
-      <div class="col s4 center-align">
-        <%= link_to team.name, league_team_path(team.league.id, team.id)%>
+      <div class="row link-style">
+        <%= link_to league_team_path(params[:id], team.id), class:'link-style' do%>
+          <div class="col s1 left-align">
+            <p>" "</p>
+          </div>
+          <div class="col s4 left-align">
+            <p><%= team.name %> </p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.wins.to_s + '-' + team.losses.to_s + '-' + team.ties.to_s %></p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.points_for %></p>
+          </div>
+          <div class="col s2 left-align">
+            <p><%= team.points_against %></p>
+          </div>
+          <div class="col s1 left-align">
+            <p><%= team.moves %></p>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  </div>
 </div>
+
+

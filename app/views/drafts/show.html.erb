@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <%= link_to "Back to League", @draft.league, class: "btn"%>
-  <div class="row">
-    <h1 class="col-sm-6">Draft for <%= @draft.league.name %></h1>
-  </div>
-  <div class = "comments">
-    <% @draft.comments.last(10).each do |comment| %>
-      <p><strong><%=comment.user.name%>: </strong><%=comment.content%></p>
-    <% end %>
+    <div class="row">
+      <h1 class="col-sm-6">Draft for <%= @draft.league.name %></h1>
+    </div>
+    <div class = "comments">
+      <% @draft.comments.last(10).each do |comment| %>
+        <p><strong><%=comment.user.name%>: </strong><%=comment.content%></p>
+      <% end %>
     </div>
     <%= form_for @comment, url: create_comment_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
       <%= f.label :your_comment %>:
@@ -16,51 +16,50 @@
   
   <h3>Last 10 Picks:</h3>
   <div class="row picks">
-  <% @draft.history.last(10).each_with_index do |history, index| %>
-    <div class="col m3 l2 xl1">
-    <div class="card small">
-    <div class="card-content">
-    <span class = "card-action"><strong><%= "Pick #{@draft.next_pick_index - @draft.history.last(10).length + index+1}" %></strong>
-      <p><%= Team.find_by_id(@draft.order[@draft.next_pick_index - 10 + index]).name %></p></span>
-      <div class="card-title">
-      <p><%=Player.find_by_id(history).name %></p>
-       <p><%=Player.find_by_id(history).position %></p>
-       <br>
-       <%= image_tag "#{Player.find_by_id(history).nfl_team}.png", width: '64' %>
-       </div>
-       </div>
-    </div>
-    </div>
-  <% end %>
+    <% @draft.history.last(10).each_with_index do |history, index| %>
+      <div class="col m3 l2 xl1">
+        <div class="card small">
+          <div class="card-content">
+          <span class = "card-action"><strong><%= "Pick #{@draft.next_pick_index - @draft.history.last(10).length + index+1}" %></strong>
+            <p><%= Team.find_by_id(@draft.order[@draft.next_pick_index - 10 + index]).name %></p></span>
+            <div class="card-title">
+            <p><%=Player.find_by_id(history).name %></p>
+            <p><%=Player.find_by_id(history).position %></p>
+            <br>
+              <%= image_tag "#{Player.find_by_id(history).nfl_team}.png", width: '64' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<div>
+
   <h3>Next 10 picks:</h3>
   <div class="row">
     <% @draft.order[@draft.next_pick_index..@draft.next_pick_index+9].each_with_index do |team_id, index| %>
       <div class="col m3 l2 xl1 <%='team_'+ team_id.to_s%>">
-      <div class = "card">
-      <div class = "card-content">
-      <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %></strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
-      </div>
+        <div class = "card">
+          <div class = "card-content">
+          <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %>
+          </strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
+        </div>
       </div>
     <% end %>
   </div>
-</div>
-<h3>Next pick: <%= @team.name %></h3>
+  <h3>Next pick: <%= @team.name %></h3>
 
-
-<%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
- <%= f.submit "Draft Player", class: "btn btn-large" %>
- <div class="collection">
- <% @players.each do |player| %>
-  <div class="collection-item">
-    <%= f.radio_button "player_id", player.id %> <%=f.label "player_id", player.name, :value => player.id %>
-    <%= player.position %> <%= player.nfl_team %>
-    <% if player.nfl_team != "" %>
-    <%= image_tag "#{player.nfl_team}.png", width: '32' %>
-    <% end %>
-    
+  <%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
+    <%= f.submit "Draft Player", class: "btn btn-large" %>
+    <div class="collection">
+      <% @players.each do |player| %>
+        <div class="collection-item">
+          <%= f.radio_button "player_id", player.id %> <%=f.label "player_id", player.name, :value => player.id %>
+          <%= player.position %> <%= player.nfl_team %>
+          <% if player.nfl_team != "" %>
+          <%= image_tag "#{player.nfl_team}.png", width: '32' %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
-  </div>
-<% end %>
+</div>

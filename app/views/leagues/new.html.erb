@@ -1,12 +1,23 @@
- <%= form_for @league do |f| %>
-  <div>
-    <%= f.text_field :name, placeholder: "Name" %>
+<div class="container">
+  <div class="row">
+    <div class="col s12 center-align">
+      <h1>Create your league</h1>
+    </div>
   </div>
-  <div>
-    <%= f.number_field :number_of_teams %>
+  <div class="row">
+    <div class="col s6 offset-s3 center-align">
+      <%= form_for @league do |f| %>
+          <div>
+            <%= f.text_field :name, placeholder: "Name" %>
+          </div>
+          <div>
+            <%= f.number_field :number_of_teams, placeholder: "Number of teams"%>
+          </div>
+          <!--<div>-->
+            <!--<%= f.text_field :format, placeholder: "format" %>-->
+          <!--</div>-->
+          <%= f.submit "Create League", class: "btn" %>
+      <% end %>
+    </div>
   </div>
-  <div>
-    <%= f.text_field :format, placeholder: "format" %>
-  </div>
-  <%= f.submit "Create League", class: "btn" %>
-<% end %>
+</div>

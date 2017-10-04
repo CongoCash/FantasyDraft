@@ -11,10 +11,15 @@
 // about supported directives.
 //
 //= require jquery
-//= turbolinks
 //= require_tree .
+//= require jquery3
+//= require materialize
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-//= require jquery3
+
 
 //= require_tree ./channels
+
+$(document).ready(function() {
+    $(".button-collapse").sideNav();
+})

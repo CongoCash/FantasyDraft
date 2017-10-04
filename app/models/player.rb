@@ -3,4 +3,6 @@ class Player < ApplicationRecord
 
   has_many :teams, through: :player_teams
 
+  has_many :player_stat
+
 end
