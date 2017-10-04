@@ -18,7 +18,7 @@ App.draft_picks = App.cable.subscriptions.create({channel:'DraftPicksChannel', i
 	  	}
   	}
   	if (data.next_team.user_id == Cookies.get('user_id')){
-  		Materialize.toast(data.team.name+' drafted '+data.player.name, 4000);
+  		Materialize.toast("It's your turn to draft!", 5000);
   		$('.draft-player').removeClass('disabled');
   		$('.draft-player').removeAttr('data-disable-with');
   		$('.draft-player').prop("disabled", false);

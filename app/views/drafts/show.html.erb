@@ -3,16 +3,6 @@
     <div class="row">
       <h1 class="col-sm-6">Draft for <%= @draft.league.name %></h1>
     </div>
-    <div class = "comments">
-      <% @draft.comments.last(10).each do |comment| %>
-        <p><strong><%=comment.user.name%>: </strong><%=comment.content%></p>
-      <% end %>
-    </div>
-    <%= form_for @comment, url: create_comment_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
-      <%= f.label :your_comment %>:
-      <%= f.text_area :content, class: "form-control", data: {textarea: "comment"} %>
-      <%= f.submit "send", class: "btn", data: {send: "comment"} %>
-    <% end %>
   
   <h3>Last 10 Picks:</h3>
   <div class="row picks">
@@ -35,21 +25,30 @@
   </div>
 
   <h3>Next 10 picks:</h3>
-  <div class="row">
+  <div class="row next-picks">
     <% @draft.order[@draft.next_pick_index..@draft.next_pick_index+9].each_with_index do |team_id, index| %>
       <div class="col m3 l2 xl1 <%='team_'+ team_id.to_s%>">
+      <% if Team.find_by_id(team_id).user == current_user %>
+        <div class = "card yellow">
+      <% else %>
         <div class = "card">
-          <div class = "card-content">
-          <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %>
-          </strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
-        </div>
+      <% end %>
+      <div class = "card-content">
+      <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %></strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
+      </div>
       </div>
     <% end %>
   </div>
-  <h3>Next pick: <%= @team.name %></h3>
-
+</div>
+<div class="row">
+<div class= "col m6">
+<h3 id="next-pick">Next pick: <%= @team.name %></h3>
   <%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
-    <%= f.submit "Draft Player", class: "btn btn-large" %>
+    <% if @team.user == current_user %>
+      <%= f.submit "Draft Player", class: "btn btn-large draft-player" %>
+    <% else %>
+      <%= f.submit "Draft Player", class: "btn btn-large draft-player disabled" %>
+    <% end %>
     <div class="collection">
       <% @players.each do |player| %>
         <div class="collection-item">
@@ -62,4 +61,18 @@
       <% end %>
     </div>
   <% end %>
+  </div>
+  <div class="col m6">
+  <div class = "comments">
+      <% @draft.comments.last(10).each do |comment| %>
+        <p><strong><%=comment.user.name%>: </strong><%=comment.content%></p>
+      <% end %>
+    </div>
+    <%= form_for @comment, url: create_comment_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
+      <%= f.label :your_comment %>:
+      <%= f.text_area :content, class: "form-control", data: {textarea: "comment"} %>
+      <%= f.submit "send", class: "btn", data: {send: "comment"} %>
+    <% end %>
+    </div>
+</div>
 </div>
