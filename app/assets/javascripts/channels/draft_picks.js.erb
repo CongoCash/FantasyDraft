@@ -1,7 +1,7 @@
 App.draft_picks = App.cable.subscriptions.create({channel:'DraftPicksChannel', id: window.location.pathname.split('/')[2]}, {  
   received: function(data) {
   	Materialize.toast(data.team.name+" drafted "+data.player.name, 4000);
-  	$("#player_team_player_id_"+data.player.id).parent().remove();
+  	$("#player_team_player_id_"+data.player.id).parent().parent().remove();
   	if ($('.picks').children().length >= 10) {
   		$('.picks').children()[0].remove();
   	}

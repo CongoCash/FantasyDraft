@@ -46,8 +46,8 @@ private
 
 
 def check_owner
-  @draft = Draft.find_by_id(params[:id])
-  if session[:user_id].to_s != @draft.user.id.to_s
+  @league = League.find_by_id(params[:id])
+  if session[:user_id].to_s != @league.user.id.to_s
     redirect_to user_path(current_user)
   end
 end
