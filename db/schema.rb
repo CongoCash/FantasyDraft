@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004174841) do
+ActiveRecord::Schema.define(version: 20171004221518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,19 +48,19 @@ ActiveRecord::Schema.define(version: 20171004174841) do
   create_table "player_stats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "player_id"
-    t.integer "pass_attempts"
-    t.integer "pass_completions"
-    t.integer "pass_yards"
-    t.integer "pass_td"
-    t.integer "pass_int"
-    t.integer "rush_attempts"
-    t.integer "rush_yards"
-    t.integer "rush_td"
-    t.integer "receptions"
-    t.integer "receive_yards"
-    t.integer "receive_td"
-    t.integer "fumbles_lost"
+    t.integer "player_id", default: 0
+    t.integer "pass_attempts", default: 0
+    t.integer "pass_completions", default: 0
+    t.integer "pass_yards", default: 0
+    t.integer "pass_td", default: 0
+    t.integer "pass_int", default: 0
+    t.integer "rush_attempts", default: 0
+    t.integer "rush_yards", default: 0
+    t.integer "rush_td", default: 0
+    t.integer "receptions", default: 0
+    t.integer "receive_yards", default: 0
+    t.integer "receive_td", default: 0
+    t.integer "fumbles_lost", default: 0
   end
 
   create_table "player_teams", force: :cascade do |t|

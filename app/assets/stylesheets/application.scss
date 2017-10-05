@@ -66,7 +66,7 @@ body {
 }
 
 .link-style:hover {
-  background-color: #7b7b7b;
+  background-color: #E0FFFF;
   color: black;
 }
 
@@ -77,4 +77,12 @@ div.link-style {
 .bold-red {
   color: red;
   font-weight: bold;
+}
+
+.stat-header {
+  background-color: #DCDCDC;
+}
+
+.nav-margin {
+  margin-bottom: 50px;
 }
