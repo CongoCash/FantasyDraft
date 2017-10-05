@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :require_login, only:[:new]
 
   def new
     @team = Team.new
@@ -23,6 +24,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find_by_id(params[:id])
+    @league = League.find_by_id(params[:league_id])
   end
 
   def destroy

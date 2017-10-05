@@ -1,5 +1,6 @@
 class DraftsController < ApplicationController
-
+  before_action :require_login, except: [:show]
+  before_action :check_owner, only: [:create]
   def create
     @draft = Draft.new
     @draft.next_pick_index = 0
@@ -39,4 +40,14 @@ class DraftsController < ApplicationController
     @comment = Comment.new
   end
 
+end
+
+private
+
+
+def check_owner
+  @draft = Draft.find_by_id(params[:id])
+  if session[:user_id].to_s != @draft.user.id.to_s
+    redirect_to user_path(current_user)
+  end
 end

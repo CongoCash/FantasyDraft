@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get '/leagues/:id/draft', to: 'drafts#show', as: 'draft'
   post '/leagues/:league_id/player_teams', to: 'player_teams#create', as: 'create_player_team'
   post 'leagues/:id/draft/comments', to: 'comments#create', as: 'create_comment'
+  get '/about', to: 'about#index'
 end

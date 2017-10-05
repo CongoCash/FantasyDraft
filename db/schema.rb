@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003235533) do
+ActiveRecord::Schema.define(version: 20171004221518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,33 @@ ActiveRecord::Schema.define(version: 20171003235533) do
   create_table "player_stats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "player_id", default: 0
+    t.integer "pass_attempts", default: 0
+    t.integer "pass_completions", default: 0
+    t.integer "pass_yards", default: 0
+    t.integer "pass_td", default: 0
+    t.integer "pass_int", default: 0
+    t.integer "rush_attempts", default: 0
+    t.integer "rush_yards", default: 0
+    t.integer "rush_td", default: 0
+    t.integer "receptions", default: 0
+    t.integer "receive_yards", default: 0
+    t.integer "receive_td", default: 0
+    t.integer "fumbles_lost", default: 0
+  end
+
+  create_table "player_teams", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_player_teams_on_player_id"
+    t.index ["team_id"], name: "index_player_teams_on_team_id"
+  end
+
+  create_table "player_week_stats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "player_id"
     t.integer "pass_attempts"
     t.integer "pass_completions"
@@ -61,15 +88,7 @@ ActiveRecord::Schema.define(version: 20171003235533) do
     t.integer "receive_yards"
     t.integer "receive_td"
     t.integer "fumbles_lost"
-  end
-
-  create_table "player_teams", force: :cascade do |t|
-    t.bigint "player_id"
-    t.bigint "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_player_teams_on_player_id"
-    t.index ["team_id"], name: "index_player_teams_on_team_id"
+    t.integer "week"
   end
 
   create_table "players", force: :cascade do |t|

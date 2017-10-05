@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
+
 	def new
-		@user = User.new
+		if current_user.nil?
+			@user = User.new
+		else
+			redirect_to user_path(current_user)
 	end
+end
 
   def create
-    user_params = params.require(:user).permit(:email, :password)
-    # confirm that email/password combination is correct
-    @user = User.confirm(user_params)
+    @user = User.confirm(login_params)
     if @user
       login(@user)
       flash[:notice] = "Successfully logged in."
@@ -22,4 +25,10 @@ class SessionsController < ApplicationController
   	flash[:notice] = "Successfully logged out."
   	redirect_to root_path
   end
+end
+
+private
+
+def login_params
+	params.require(:user).permit(:email, :password)
 end
