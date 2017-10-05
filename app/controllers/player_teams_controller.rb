@@ -10,13 +10,15 @@ class PlayerTeamsController < ApplicationController
       @draft.history << @player_team.player_id
       @draft.next_pick_index += 1
       @draft.save
+      if (@draft.next_pick_index >= @draft.order.length)
+        redirect_to @league and return
+      end
       ActionCable.server.broadcast "draft_picks_#{params[:league_id]}",
         player: @player_team.player,
         team: @player_team.team,
         draft: @draft,
         next_team: Team.find_by_id(@draft.order[@draft.next_pick_index]),
-        last_team: Team.find_by_id(@draft.order[@draft.next_pick_index+9]),
-        current_user: @team.user
+        last_team: Team.find_by_id(@draft.order[@draft.next_pick_index+9])
     else
       flash[:error] = @player_team.errors.full_messages.join(". ")
       redirect_to draft_path(@draft.league.id, @draft.id)

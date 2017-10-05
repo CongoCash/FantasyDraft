@@ -1,24 +1,31 @@
-# README
+# Fantasy Football Drafting App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a basic fantasy football app where users can create leagues, join leagues, start live drafts, and view players' stats.
 
-Things you may want to cover:
+Users can make an account, log in and view all the available leagues that have been created and join them. They can also create their own leagues, of which they are the commisioner of. The commisioner can then start a draft where teams will pick in a snake draft order. In the draft room, users can live chat with each other, and when draft picks are made the page live updates for every user. Players are ordered by an editor's ranks, and all relevant stats are visible. Players can then view their teams, with all their players and stats.
 
-* Ruby version
+[Heroku link](https://quiet-caverns-35726.herokuapp.com/)
 
-* System dependencies
+Technologies used: 
 
-* Configuration
+* Ruby on Rails
+* Javascript/JQuery
+* PostgreSQL
+* HTML
+* CSS
+* Materialize
+* ActionCable
+* HTTParty
+* NFL Fantasy API
 
-* Database creation
 
-* Database initialization
+Future development ideas:
 
-* How to run the test suite
+* Head to head team matchups
+* Add a draft clock and ability to see which users are logged in to the draft
+* Add more styling and javascript
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Contributors: 
+* [Ellis Mitchell](https://github.com/ellismitchell)
+* [David Jue](https://github.com/congocash)
+* [Jimmy Cheng](https://github.com/jcheng305)

@@ -31,11 +31,9 @@ class DraftsController < ApplicationController
   def show
     @draft = League.find_by_id(params[:id]).draft
     @user = League.find_by_id(params[:id]).user
-    # if @draft.nil?
-    #   flash[:error] = "Draft has not started yet!"
-    #   redirect_to league_path(params[:id])
-    # end
-    @team_order = Team
+    if (@draft.next_pick_index >= @draft.order.length)
+        redirect_to @draft.league and return
+    end
     @team = Team.find_by_id(@draft.order[@draft.next_pick_index])
     @player_team = PlayerTeam.new
     @players = Player.all - @draft.league.players
