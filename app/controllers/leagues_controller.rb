@@ -1,4 +1,5 @@
 class LeaguesController < ApplicationController
+	  before_action :require_login, except: [:index, :show]
 
 	def index
 		@leagues = League.all
@@ -15,7 +16,11 @@ class LeaguesController < ApplicationController
 	end
 
 	def new
+		if current_user.nil?
+			redirect_to new_user_path
+		end
 		@league = League.new
+
 	end
 
 	def create

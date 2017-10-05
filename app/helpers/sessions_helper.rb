@@ -13,5 +13,11 @@ module SessionsHelper
   def logout
   	@current_user = session[:user_id] = nil
   end
-  
+	def require_login
+		if session[:user_id].nil?
+			flash[:error] = "Please sign in or create an account to access this domain!"
+		redirect_to new_user_path
+	end
+end
+
 end
