@@ -22,18 +22,22 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <% if current_user %>
+                <li><%= link_to "About Us", about_path %></li>
                 <li><%= link_to "Profile", user_path(current_user) %></li>
                 <li><%= link_to "Log Out", logout_path %></li>
             <% else %>
+                <li><%= link_to "About Us", about_path %></li>
                 <li><%= link_to "Register", new_user_path %></li>
                 <li><%= link_to "Sign in", login_path %></li>
             <% end %>
           </ul>
           <ul class="side-nav" id="mobile-demo">
             <% if current_user %>
+                <li><%= link_to "About Us", about_path %></li>
                 <li><%= link_to "Profile", user_path(current_user) %></li>
                 <li><%= link_to "Log Out", logout_path %></li>
             <% else %>
+                <li><%= link_to "About Us", about_path %></li>
                 <li><%= link_to "Register", new_user_path %></li>
                 <li><%= link_to "Sign in", login_path %></li>
             <% end %>

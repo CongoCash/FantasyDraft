@@ -1,7 +1,7 @@
 App.draft_picks = App.cable.subscriptions.create({channel:'DraftPicksChannel', id: window.location.pathname.split('/')[2]}, {  
   received: function(data) {
-  	Materialize.toast(`${data.team.name} drafted ${data.player.name}`, 4000);
-  	$(`#player_team_player_id_${data.player.id}`).parent().remove();
+  	Materialize.toast(data.team.name+" drafted "+data.player.name, 4000);
+  	$("#player_team_player_id_"+data.player.id).parent().remove();
   	if ($('.picks').children().length >= 10) {
   		$('.picks').children()[0].remove();
   	}
@@ -9,26 +9,16 @@ App.draft_picks = App.cable.subscriptions.create({channel:'DraftPicksChannel', i
   	$('#next-pick').html("Next pick: "+data.next_team.name);
   	if (data.draft.order.length >= data.draft.next_pick_index+10) {
   		if (data.last_team.user_id == Cookies.get('user_id')){
-	  		$('.next-picks').append(`<div class="col m3 l2 xl1">
-		      <div class = "card yellow">
-		      <div class = "card-content">
-		      <p><strong>Pick ${data.draft.next_pick_index + 10}</strong></p><p>${data.last_team.name}</p></div>
-		      </div>
-		      </div>`
+	  		$('.next-picks').append('<div class="col m3 l2 xl1"><div class = "card yellow"><div class = "card-content"><p><strong>Pick '+(data.draft.next_pick_index + 10).toString()+'</strong></p><p>'+data.last_team.name+'</p></div></div></div>'
 		  		);
   		}
 	  	else{
-	  		$('.next-picks').append(`<div class="col m3 l2 xl1">
-		      <div class = "card">
-		      <div class = "card-content">
-		      <p><strong>Pick ${data.draft.next_pick_index + 10}</strong></p><p>${data.last_team.name}</p></div>
-		      </div>
-		      </div>`
+	  		$('.next-picks').append('<div class="col m3 l2 xl1"><div class = "card"><div class = "card-content"><p><strong>Pick '+(data.draft.next_pick_index + 10).toString()+'</strong></p><p>'+data.last_team.name+'</p></div></div></div>'
 		  		);
 	  	}
   	}
   	if (data.next_team.user_id == Cookies.get('user_id')){
-  		Materialize.toast(`It's your pick!`, 10000);
+  		Materialize.toast("It's your turn to draft!", 5000);
   		$('.draft-player').removeClass('disabled');
   		$('.draft-player').removeAttr('data-disable-with');
   		$('.draft-player').prop("disabled", false);
@@ -41,20 +31,6 @@ App.draft_picks = App.cable.subscriptions.create({channel:'DraftPicksChannel', i
   },
 
   renderDraftPick: function(data) {
-    return `<div class='col m3 l2 xl1'>
-    <div class='card small'>
-    <div class='card-content'>
-    <span class = 'card-action'>
-    	<p><b>Pick ${data.draft.next_pick_index}</b></p>
-      <p>${data.team.name}</p></span>
-      <div class='card-title'>
-      <p>${data.player.name}</p>
-       <p>${data.player.position}</p>
-       <br>
-       <image src='/assets/${data.player.nfl_team}.png', width='64'>
-       </div>
-       </div>
-    </div>
-    </div>`;
+    return "<div class='col m3 l2 xl1'><div class='card small'><div class='card-content'><span class = 'card-action'><p><b>Pick "+data.draft.next_pick_index+"</b></p><p>"+data.team.name+"</p></span><div class='card-title'><p>"+data.player.name+"</p><p>"+data.player.position+"</p><br><image src='/assets/"+data.player.nfl_team+".png', width='64'></div></div></div></div>";
   }
 });

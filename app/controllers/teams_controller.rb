@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :require_login, only:[:new]
 
   def new
     @team = Team.new
