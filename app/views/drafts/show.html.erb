@@ -34,15 +34,15 @@
         <div class = "card">
       <% end %>
       <div class = "card-content">
-      <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %></strong></p><p> <%= @team_order.find_by_id(team_id).name %></p></div>
+      <p><strong><%= "Pick #{@draft.next_pick_index + index+1}" %></strong></p><p> <%= Team.find_by_id(team_id).name %></p></div>
       </div>
       </div>
     <% end %>
   </div>
 </div>
 <div class="row">
-<div class= "col m6">
-<h3 id="next-pick">Next pick: <%= @team.name %></h3>
+  <div class= "col m6">
+  <h3 id="next-pick">Next pick: <%= @team.name %></h3>
   <%= form_for @player_team, url: create_player_team_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
     <% if @team.user == current_user %>
       <%= f.submit "Draft Player", class: "btn btn-large draft-player" %>
@@ -63,7 +63,7 @@
   <% end %>
   </div>
   <div class="col m6">
-  <div class = "comments">
+    <div class = "comments">
       <% @draft.comments.last(10).each do |comment| %>
         <p><strong><%=comment.user.name%>: </strong><%=comment.content%></p>
       <% end %>
@@ -74,5 +74,5 @@
       <%= f.submit "send", class: "btn", data: {send: "comment"} %>
     <% end %>
     </div>
-</div>
+  </div>
 </div>
