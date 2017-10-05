@@ -9,16 +9,16 @@
       <% end %>
     </div>
     <%= form_for @comment, url: create_comment_path(@draft.league.id), remote: true, authenticity_token: true do |f| %>
-      <%= f.label :your_comment %>:
+      <%= f.label :your_comment, "Live Chatbox here:" %>:
       <%= f.text_area :content, class: "form-control", data: {textarea: "comment"} %>
       <%= f.submit "send", class: "btn", data: {send: "comment"} %>
     <% end %>
-  
+
   <h3>Last 10 Picks:</h3>
   <div class="row picks">
     <% @draft.history.last(10).each_with_index do |history, index| %>
-      <div class="col m3 l2 xl1">
-        <div class="card small">
+      <div class="col m3 l2 xl2">
+        <div class="card medium">
           <div class="card-content">
           <span class = "card-action"><strong><%= "Pick #{@draft.next_pick_index - @draft.history.last(10).length + index+1}" %></strong>
             <p><%= Team.find_by_id(@draft.order[@draft.next_pick_index - 10 + index]).name %></p></span>

@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+		before_action :require_login, except: [:new, :create, :user_params, :show, :index]
+
+	def index
+		redirect_to root_path
+	end
+
 	def new
 		@user = User.new
 	end

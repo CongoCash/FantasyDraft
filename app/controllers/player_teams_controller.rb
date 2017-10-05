@@ -1,4 +1,5 @@
 class PlayerTeamsController < ApplicationController
+  before_action :require_login
   def create
     @league = League.find_by_id(params[:league_id])
     @draft = @league.draft
@@ -19,7 +20,7 @@ class PlayerTeamsController < ApplicationController
       flash[:error] = @player_team.errors.full_messages.join(". ")
       redirect_to draft_path(@draft.league.id, @draft.id)
     end
-      
+
   end
   private
 

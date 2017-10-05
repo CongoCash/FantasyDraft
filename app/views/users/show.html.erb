@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col s6 offset-s3 center-align">
+      <%= link_to 'Create League', new_league_path, class: 'btn btn-primary btn-large blue' %>
+
       <h1><%= @user.name + "'s leagues" %></h1>
       <hr>
       <% @user.leagues.each do |league| %>
@@ -9,4 +11,3 @@
     </div>
   </div>
 </div>
-
