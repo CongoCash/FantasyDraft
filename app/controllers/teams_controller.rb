@@ -24,6 +24,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find_by_id(params[:id])
+    @league = League.find_by_id(params[:league_id])
   end
 
   def destroy

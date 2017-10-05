@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row">
+    <div class="col s12 center-align">
+      <%= link_to "Back to League", league_path(params[:id]), class: "btn"%>
+    </div>
     <div class="col s12">
       <h1 class="center-align"><%= @team.name %></h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row stat-header">
 
     <div class="col s1 left-align">
       <p>Position</p>
@@ -59,24 +62,24 @@
   </div>
 
   <% @team.players.each do |player| %>
-      <div class="row">
+      <div class="row link-style">
 
-        <div class="col s1 left-align">
+        <div class="col s1 left-align vertical-border-column">
           <p><%=player.position%></p>
         </div>
-        <div class="col s2 left-align">
+        <div class="col s2 left-align vertical-border-column">
           <p><%=player.name%></p>
         </div>
 
         <div class="col s2 left-align">
           <div class="row">
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["pass_yards"]%></p>
             </div>
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["pass_td"]%></p>
             </div>
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["pass_int"]%></p>
             </div>
           </div>
@@ -84,29 +87,29 @@
 
         <div class="col s3 left-align">
           <div class="row">
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["rush_attempts"]%></p>
             </div>
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["rush_yards"]%></p>
             </div>
-            <div class="col s4 left-align">
+            <div class="col s4 left-align vertical-border-column">
               <p><%=player.player_stat[0]["rush_td"]%></p>
             </div>
           </div>
         </div>
         <div class="col s4 left-align">
           <div class="row">
-            <div class="col s3 left-align">
+            <div class="col s3 left-align vertical-border-column">
               <p><%=player.player_stat[0]["receptions"]%></p>
             </div>
-            <div class="col s3 left-align">
+            <div class="col s3 left-align vertical-border-column">
               <p><%=player.player_stat[0]["receive_yards"]%></p>
             </div>
-            <div class="col s3 left-align">
+            <div class="col s3 left-align vertical-border-column">
               <p><%=player.player_stat[0]["receive_td"]%></p>
             </div>
-            <div class="col s3 left-align">
+            <div class="col s3 left-align vertical-border-column">
               <p><%=player.player_stat[0]["fumbles_lost"]%></p>
             </div>
           </div>

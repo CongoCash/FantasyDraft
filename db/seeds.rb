@@ -59,25 +59,89 @@ end
 
 stats = HTTParty.get("http://api.fantasy.nfl.com/v1/players/stats?statType=seasonStats&season=2017&week=5&format=json")
 
+Player.all.each do |player|
+  puts "player_id=" + player.player_id.to_s
+  player.player_stat.create({
+    pass_attempts: 0,
+    pass_completions: 0,
+    pass_yards: 0,
+    pass_td: 0,
+    pass_int: 0,
+    rush_attempts: 0,
+    rush_yards: 0,
+    rush_td: 0,
+    receptions: 0,
+    receive_yards: 0,
+    receive_td: 0,
+    fumbles_lost: 0,
+    })
+end
 
 stats["players"].each do |stat|
   if Player.exists?(player_id: stat["id"].to_i)
     current_player = Player.find_by(player_id: stat["id"].to_i)
-    current_player.player_stat.create({
-      player_id: stat["id"].to_i,
-      pass_attempts: stat["stats"]["2"].to_i,
-      pass_completions: stat["stats"]["3"].to_i,
-      pass_yards: stat["stats"]["5"].to_i,
-      pass_td: stat["stats"]["6"].to_i,
-      pass_int: stat["stats"]["7"].to_i,
-      rush_attempts: stat["stats"]["13"].to_i,
-      rush_yards: stat["stats"]["14"].to_i,
-      rush_td: stat["stats"]["15"].to_i,
-      receptions: stat["stats"]["20"].to_i,
-      receive_yards: stat["stats"]["21"].to_i,
-      receive_td: stat["stats"]["22"].to_i,
-      fumbles_lost: stat["stats"]["30"].to_i,
-    })
+    if stat["stats"].length > 0
+      puts "id=" + stat["id"]
+      current_player.player_stat.update({
+        # player_id: stat["id"].to_i,
+        pass_attempts: stat["stats"]["2"].to_i,
+        pass_completions: stat["stats"]["3"].to_i,
+        pass_yards: stat["stats"]["5"].to_i,
+        pass_td: stat["stats"]["6"].to_i,
+        pass_int: stat["stats"]["7"].to_i,
+        rush_attempts: stat["stats"]["13"].to_i,
+        rush_yards: stat["stats"]["14"].to_i,
+        rush_td: stat["stats"]["15"].to_i,
+        receptions: stat["stats"]["20"].to_i,
+        receive_yards: stat["stats"]["21"].to_i,
+        receive_td: stat["stats"]["22"].to_i,
+        fumbles_lost: stat["stats"]["30"].to_i,
+      })
+    end
+  end
+end
+
+Player.all.each do |player|
+  player_id = player.player_id.to_s
+  week_stat = HTTParty.get("http://api.fantasy.nfl.com/v1/players/details?playerId=" + player_id + "&statType=seasonStatsformat=json")
+  week_stat["players"][0]["weeks"].each do |week_stats|
+    if week_stats["stats"].length > 0
+      puts "uuu"
+      Player.find_by(player_id: player_id.to_i).player_week_stats.create({
+        player_id: player_id.to_i,
+        week: week_stats["id"].to_i,
+        pass_attempts: week_stats["stats"]["2"].to_i,
+        pass_completions: week_stats["stats"]["3"].to_i,
+        pass_yards: week_stats["stats"]["5"].to_i,
+        pass_td: week_stats["stats"]["6"].to_i,
+        pass_int: week_stats["stats"]["7"].to_i,
+        rush_attempts: week_stats["stats"]["13"].to_i,
+        rush_yards: week_stats["stats"]["14"].to_i,
+        rush_td: week_stats["stats"]["15"].to_i,
+        receptions: week_stats["stats"]["20"].to_i,
+        receive_yards: week_stats["stats"]["21"].to_i,
+        receive_td: week_stats["stats"]["22"].to_i,
+        fumbles_lost: week_stats["stats"]["30"].to_i,
+      })
+    else
+      puts "ggg"
+      Player.find_by(player_id: player_id.to_i).player_week_stats.create({
+        player_id: player_id.to_i,
+        week: week_stats["id"].to_i,
+        pass_attempts: 0,
+        pass_completions: 0,
+        pass_yards: 0,
+        pass_td: 0,
+        pass_int: 0,
+        rush_attempts: 0,
+        rush_yards: 0,
+        rush_td: 0,
+        receptions: 0,
+        receive_yards: 0,
+        receive_td: 0,
+        fumbles_lost: 0,
+      })
+    end
   end
 end
 

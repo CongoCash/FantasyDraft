@@ -49,17 +49,46 @@
     <% else %>
       <%= f.submit "Draft Player", class: "btn btn-large draft-player disabled" %>
     <% end %>
-    <div class="collection">
-      <% @players.each do |player| %>
-        <div class="collection-item">
-          <%= f.radio_button "player_id", player.id %> <%=f.label "player_id", player.name, :value => player.id %>
-          <%= player.position %> <%= player.nfl_team %>
-          <% if player.nfl_team != "" %>
-          <%= image_tag "#{player.nfl_team}.png", width: '32' %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Pass Yards</th>
+            <th>Pass TD</th>
+            <th>INT</th>
+            <th>Rush Att</th>
+            <th>Rush Yards</th>
+            <th>Rush TD</th>
+            <th>Receptions</th>
+            <th>Rec Yards</th>
+            <th>Rec TD</th>
+            <th>Fumbles</th>
+          </tr>
+        </thead>
+        <% @players.each do |player| %>
+            <tbody>
+              <tr>
+                <td><%= f.radio_button "player_id", player.id %> <%=f.label "player_id", player.name, :value => player.id %></td>
+                <td><%= player.position %></td>
+                <% if player.nfl_team != "" %>
+                    <td><%= player.nfl_team %><%= image_tag "#{player.nfl_team}.png", width: '32' %></td>
+                <% end %>
+                  <td><%=player.player_stat[0].pass_yards%></td>
+                  <td><%=player.player_stat[0].pass_td%></td>
+                  <td><%=player.player_stat[0].pass_int%></td>
+                  <td><%=player.player_stat[0].rush_attempts%></td>
+                  <td><%=player.player_stat[0].rush_yards%></td>
+                  <td><%=player.player_stat[0].rush_td%></td>
+                  <td><%=player.player_stat[0].receptions%></td>
+                  <td><%=player.player_stat[0].receive_yards%></td>
+                  <td><%=player.player_stat[0].receive_td%></td>
+                  <td><%=player.player_stat[0].fumbles_lost%></td>
+              </tr>
+            </tbody>
+        <% end %>
+      </table>
   <% end %>
 
 </div>
